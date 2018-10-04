@@ -36,10 +36,10 @@ public class UserDaoTest {
 		
 	@Before
 	public void setUp() {
-		this.user0 = new User("test1", "¼ÛÁÖÇå", "P@ssw0rd", "test1@test.com", Level.BASIC, 1, 0);
-		this.user1 = new User("test2", "ÀÌÁøÈ£", "P@ssw0rd", "test2@test.com", Level.SILVER, 55, 10);
-		this.user2 = new User("test3", "¿Á½ÂÃ¶", "P@ssw0rd", "test3@test.com", Level.GOLD, 100, 40);
-		this.user3 = new User("test4", "ÀÌ»ó¹Î", "P@ssw0rd", "test4@test.com", Level.SILVER, 22, 21);
+		this.user0 = new User("test1", "¼ÛÁÖÇå", "P@ssw0rd", Level.BASIC, 1, 0);
+		this.user1 = new User("test2", "ÀÌÁøÈ£", "P@ssw0rd", Level.SILVER, 55, 10);
+		this.user2 = new User("test3", "¿Á½ÂÃ¶", "P@ssw0rd", Level.GOLD, 100, 40);
+		this.user3 = new User("test4", "ÀÌ»ó¹Î", "P@ssw0rd", Level.SILVER, 22, 21);
 	}
 	
 	@Test

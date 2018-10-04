@@ -37,16 +37,16 @@ public class UserService {
 	public static final int MIN_RECOMMEND_FOR_GOLD = 31;
 	
 	private PlatformTransactionManager transactionManager;
-	private MailSender mailSender;
+	//private MailSender mailSender;
 	
 	public void setTransactionManager(PlatformTransactionManager transactionManager) {
 		this.transactionManager = transactionManager;
 	}
-	
+	/*
 	public void setMailSender(MailSender mailSender) {
 		this.mailSender = mailSender;
 	}
-	
+	*/
 	UserDao userDao;
 	
 	private DataSource dataSource;	//Connection을 생설할 때 사용할 DataSource를 DI 받도록 한다.
@@ -97,9 +97,10 @@ public class UserService {
 	protected void upgradeLevel(User user) {
 		user.upgradeLevel();
 		userDao.update(user);
-		sendUpgradeEMail(user);
+		//sendUpgradeEMail(user);
 	}
 	
+	/*
 	private void sendUpgradeEMail(User user) {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setTo(user.getEmail());
@@ -109,7 +110,7 @@ public class UserService {
 		
 		this.mailSender.send(mailMessage);
 	}
-	
+	*/
 	public void add(User user) {
 		if(user.getLevel() == null) user.setLevel(Level.BASIC);
 		userDao.add(user);

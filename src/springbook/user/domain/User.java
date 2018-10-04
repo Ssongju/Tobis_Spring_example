@@ -7,16 +7,15 @@ public class User {
 	String id;
 	String name;
 	String password;
-	String email;
 	int login;
 	int recommend;
 	
-	public User(String id, String name, String password, String email,
+	public User(String id, String name, String password, 
 			Level level, int login, int recommend) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
-		this.email = email;
+		
 		this.level = level;
 		this.login = login;
 		this.recommend = recommend;
@@ -63,14 +62,7 @@ public class User {
 	public void setRecommend(int recommend) {
 		this.recommend = recommend;
 	}
-	
-	public String getEmail() {
-		return email;
-	}
-	
-	public void setEmail(String email) {
-		this.email = email;
-	}
+
 	
 	public void upgradeLevel() {
 		Level nextLevel = this.level.nextLevel();
