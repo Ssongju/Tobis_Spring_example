@@ -39,17 +39,18 @@ public class UserServiceTest {
 	@Autowired
 	UserDao userDao;
 	@Autowired DataSource dataSource;
+	@Autowired MailSender mailSender;
 	
 	@Before
 	public void setUp() {
 		user = new User();
 		
 		users = Arrays.asList(
-				new User("bumjin", "박범진", "p1",  Level.BASIC, MIN_LOGOUT_FOR_SILVER-1, 0),
-				new User("joytouch", "강명성", "p2", Level.BASIC, MIN_LOGOUT_FOR_SILVER, 0),
-				new User("erwins", "신승한", "p3", Level.SILVER, 60, MIN_RECOMMEND_FOR_GOLD-1),
-				new User("madnite1", "이상호", "p4", Level.SILVER, 60, MIN_RECOMMEND_FOR_GOLD),
-				new User("green", "오민규", "p5", Level.GOLD, 100, Integer.MAX_VALUE));
+				new User("bumjin", "박범진", "p1",  Level.BASIC, MIN_LOGOUT_FOR_SILVER-1, 0, "test1@test.com"),
+				new User("joytouch", "강명성", "p2", Level.BASIC, MIN_LOGOUT_FOR_SILVER, 0, "test2@test.com"),
+				new User("erwins", "신승한", "p3", Level.SILVER, 60, MIN_RECOMMEND_FOR_GOLD-1, "test3@test.com"),
+				new User("madnite1", "이상호", "p4", Level.SILVER, 60, MIN_RECOMMEND_FOR_GOLD, "test4@test.com"),
+				new User("green", "오민규", "p5", Level.GOLD, 100, Integer.MAX_VALUE, "test5@test.com"));
 				
 	}
 	
@@ -64,11 +65,8 @@ public class UserServiceTest {
 		checkLevelUpgraded(users.get(1), true);
 		checkLevelUpgraded(users.get(2), false);
 		checkLevelUpgraded(users.get(3), true);
-		checkLevelUpgraded(users.get(4), false);
-		
+		checkLevelUpgraded(users.get(4), false);	
 	}
-	
-	
 	
 	@Test
 	public void add() {
@@ -87,7 +85,6 @@ public class UserServiceTest {
 		assertThat(userWithLevelRead.getLevel(), is(userWithLevel.getLevel()));
 		assertThat(userWithoutLevelRead.getLevel(), is(Level.BASIC));
 	}
-	
 	
 	@Test
 	public void upgradeLevel() {
@@ -112,8 +109,9 @@ public class UserServiceTest {
 	
 	@Autowired PlatformTransactionManager transactionManager;
 	@Test
-	public void upgradeAllorNothing() {
+	public void upgradeAllorNothing() throws Exception {
 		UserService testUserService = new TestUserService(users.get(3).getId());
+		testUserService.setMailSender(mailSender);
 		testUserService.setUserDao(userDao);
 		testUserService.setTransactionManager(transactionManager);
 		userDao.deleteAll();
@@ -126,6 +124,7 @@ public class UserServiceTest {
 		catch(TestUserServiceException e) {}
 		
 		checkLevelUpgraded(users.get(1), false);
+		
 	}
 	
 	static class TestUserService extends UserService {

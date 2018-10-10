@@ -36,10 +36,10 @@ public class UserDaoTest {
 		
 	@Before
 	public void setUp() {
-		this.user0 = new User("test1", "¼ÛÁÖÇå", "P@ssw0rd", Level.BASIC, 1, 0);
-		this.user1 = new User("test2", "ÀÌÁøÈ£", "P@ssw0rd", Level.SILVER, 55, 10);
-		this.user2 = new User("test3", "¿Á½ÂÃ¶", "P@ssw0rd", Level.GOLD, 100, 40);
-		this.user3 = new User("test4", "ÀÌ»ó¹Î", "P@ssw0rd", Level.SILVER, 22, 21);
+		this.user0 = new User("test1", "¼ÛÁÖÇå", "P@ssw0rd", Level.BASIC, 1, 0, "test1@test.com");
+		this.user1 = new User("test2", "ÀÌÁøÈ£", "P@ssw0rd", Level.SILVER, 55, 10, "test2@test.com");
+		this.user2 = new User("test3", "¿Á½ÂÃ¶", "P@ssw0rd", Level.GOLD, 100, 40, "test3@test.com");
+		this.user3 = new User("test4", "ÀÌ»ó¹Î", "P@ssw0rd", Level.SILVER, 22, 21, "test4@test.com");
 	}
 	
 	@Test
@@ -142,6 +142,7 @@ public class UserDaoTest {
 		user1.setLevel(Level.GOLD);
 		user1.setLogin(1000);
 		user1.setRecommend(999);
+		user1.setEmail("test5@test.com");
 		dao.update(user1);
 		
 		User user1update = dao.get(user1.getId());
