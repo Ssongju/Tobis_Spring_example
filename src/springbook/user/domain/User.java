@@ -71,7 +71,6 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	
 	public void upgradeLevel() {
 		Level nextLevel = this.level.nextLevel();
